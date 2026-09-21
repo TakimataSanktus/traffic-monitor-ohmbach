@@ -1,0 +1,987 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: dark;
+
+  --bg: #171717;
+  --panel: #292929;
+  --panel-dark: #202020;
+  --border: #3b3b3b;
+  --text: #e6e6e6;
+  --muted: #aaaaaa;
+  --accent: #00bcd4;
+  --accent-hover: #19cbe2;
+  --status: #00e6b8;
+  --measure: #ffeb3b;
+  --radius: 8px;
+  --gap: 12px;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  padding: 12px;
+
+  background: var(--bg);
+  color: var(--text);
+
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ==========================================================
+   Kopfbereich (Dashboard)
+   ========================================================== */
+
+.dashboard-header {
+  min-height: 56px;
+  margin-bottom: var(--gap);
+  padding: 10px 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  line-height: 1.25;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 10px;
+}
+
+/* Spezifische Styling-Regel für Header-Buttons zur Vermeidung von Kollisionen mit der Galerie */
+.nav-links .nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #2a2a2a;
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.2s ease;
+}
+
+.nav-links .nav-btn:hover {
+  background: #383838;
+  border-color: #00e5ff;
+  color: #00e5ff;
+}
+
+.status {
+  min-width: 0;
+  color: var(--status);
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================================
+   Desktop-Grundstruktur
+   ========================================================== */
+
+.dashboard-layout {
+  min-height: calc(100vh - 92px);
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 580px;
+  gap: var(--gap);
+
+  align-items: stretch;
+}
+
+.left-column {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.right-column {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.data-box,
+.panel,
+.settings-card {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* ==========================================================
+   Messwert
+   ========================================================== */
+
+.measure-box {
+  flex: 0 0 auto;
+  min-height: 54px;
+  padding: 12px 16px;
+
+  display: flex;
+  align-items: center;
+
+  background: var(--panel-dark);
+  color: var(--measure);
+
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================================
+   Livebild und Auslösefoto (Desktop)
+   ========================================================== */
+
+.media-grid {
+  min-height: 320px;
+  flex: 1;
+
+  display: grid;
+  grid-template-columns: 0.7fr 1.2fr;
+  gap: var(--gap);
+}
+
+.panel {
+  min-height: 320px;
+  position: relative;
+  overflow: hidden;
+  background: #000000;
+}
+
+.panel-title {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+
+  max-width: calc(100% - 16px);
+  margin: 0;
+  padding: 5px 9px;
+
+  background: rgb(0 0 0 / 72%);
+  border-radius: 4px;
+
+  font-size: 0.82rem;
+  line-height: 1.2;
+}
+
+.stream-container,
+.snapshot-container {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #050505;
+}
+
+#snapshot {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: calc(100vh - 165px);
+
+  object-fit: contain;
+  object-position: center;
+}
+
+#videoStream {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-height: calc(100vh - 165px);
+
+  transform: rotate(90deg);
+  transform-origin: center center;
+  scale: 0.55;
+  object-fit: contain;
+}
+
+.stream-placeholder {
+  display: none;
+  padding: 24px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.stream-placeholder strong,
+.stream-placeholder span {
+  display: block;
+}
+
+.stream-placeholder span {
+  margin-top: 6px;
+  color: #777777;
+  font-size: 0.9rem;
+}
+
+/* ==========================================================
+   Überschriften
+   ========================================================== */
+
+.section-heading {
+  margin: 0;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+/* ==========================================================
+   Einstellungen
+   ========================================================== */
+
+.settings-card {
+  padding: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 12px;
+  background: var(--panel);
+  flex: 0 0 auto;
+}
+
+.settings-heading {
+  grid-column: 1 / -1;
+  padding: 0 0 2px;
+}
+
+.settings-card label {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.85rem;
+}
+
+.settings-card input {
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 10px;
+
+  background: var(--bg);
+  border: 1px solid #555555;
+  border-radius: 5px;
+  color: #ffffff;
+  font: inherit;
+}
+
+.settings-card input:focus-visible,
+button:focus-visible {
+  outline: 3px solid rgb(0 188 212 / 40%);
+  outline-offset: 2px;
+}
+
+button {
+  min-height: 44px;
+  padding: 9px 15px;
+
+  background: var(--accent);
+  border: 0;
+  border-radius: 5px;
+  color: #111111;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--accent-hover);
+}
+
+#saveSettingsBtn {
+  grid-column: 1 / -1;
+}
+
+/* ==========================================================
+   HEX-Rohdaten
+   ========================================================== */
+
+.hex-box {
+  flex: 0 0 auto;
+  padding: 9px 12px;
+  background: var(--panel-dark);
+  color: var(--status);
+
+  font-family: Consolas, 'Courier New', monospace;
+  font-size: 0.75rem;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================
+   Systemprotokoll
+   ========================================================== */
+
+.log-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--panel);
+  min-height: 180px;
+}
+
+#output {
+  flex: 1;
+  height: 100%;
+  margin: 0;
+  padding: 10px 12px;
+
+  background: var(--panel-dark);
+  color: var(--text);
+
+  font-family: Consolas, 'Courier New', monospace;
+  font-size: 0.8rem;
+  line-height: 1.35;
+
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  overflow-y: hidden;
+  box-sizing: border-box;
+}
+
+/* ==========================================================
+   Smartphone und schmale Tablets
+   ========================================================== */
+
+@media (max-width: 760px) {
+  :root {
+    --gap: 10px;
+  }
+
+  body {
+    min-width: 0;
+    padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right))
+      max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+  }
+
+  .dashboard-header {
+    min-height: 0;
+    margin-bottom: var(--gap);
+    padding: 10px 12px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.08rem;
+  }
+
+  .status {
+    width: 100%;
+    font-size: 0.82rem;
+    text-align: left;
+  }
+
+  .dashboard-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: auto;
+  }
+
+  .left-column,
+  .right-column,
+  .media-grid {
+    display: contents;
+  }
+
+  .measure-box {
+    order: 1;
+    min-height: 48px;
+    padding: 10px 12px;
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+
+  .live-panel {
+    order: 2;
+  }
+
+  .log-panel {
+    order: 3;
+    display: flex;
+    flex-direction: column;
+    min-height: 180px;
+    flex: none;
+  }
+
+  .snapshot-panel {
+    order: 4;
+  }
+
+  .settings-card {
+    order: 5;
+    padding: 12px;
+    grid-template-columns: 1fr;
+    gap: 11px;
+  }
+
+  .hex-box {
+    order: 6;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    font-size: 0.72rem;
+  }
+
+  .panel,
+  .stream-container,
+  .snapshot-container {
+    min-height: 0;
+  }
+
+  .live-panel,
+  .stream-container {
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  #videoStream {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .snapshot-panel,
+  .snapshot-container {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  #snapshot {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .panel-title {
+    top: 6px;
+    left: 6px;
+    max-width: calc(100% - 12px);
+    padding: 4px 7px;
+    font-size: 0.76rem;
+  }
+
+  #output {
+    height: 180px;
+    flex: none;
+  }
+
+  .settings-heading,
+  #saveSettingsBtn {
+    grid-column: 1;
+  }
+
+  .settings-card label {
+    gap: 6px;
+    font-size: 0.88rem;
+  }
+
+  .settings-card input {
+    min-height: 46px;
+    padding: 10px 11px;
+    font-size: 16px;
+  }
+
+  #saveSettingsBtn {
+    width: 100%;
+    min-height: 48px;
+  }
+}
+
+/* ==========================================================
+   Galerie (gallery.html)
+   ========================================================== */
+
+body.gallery-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 0;
+}
+
+body.gallery-page header {
+  padding: 12px 20px;
+  background: var(--panel);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+body.gallery-page a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.gallery-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.img-wrapper {
+  max-width: 85%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gallery-container img {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+/* Steuerungspfeile in der Galerie */
+.gallery-container .nav-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  border: 1px solid var(--border);
+  font-size: 2.5rem;
+  padding: 15px 25px;
+  cursor: pointer;
+  border-radius: var(--radius);
+  user-select: none;
+  transition:
+    background 0.2s,
+    opacity 0.2s;
+}
+
+.gallery-container .nav-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.gallery-container .nav-btn:disabled {
+  opacity: 0.15;
+  cursor: default;
+}
+
+.info {
+  margin-top: 12px;
+  font-size: 1rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Galerie: Mobile Ansicht */
+@media (max-width: 900px) {
+  .gallery-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      'image image'
+      'previous next';
+    align-items: stretch;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .img-wrapper {
+    grid-area: image;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 300px;
+  }
+
+  .img-wrapper img {
+    width: 100%;
+    max-width: 100%;
+    max-height: 65vh;
+    object-fit: contain;
+  }
+
+  #prevBtn {
+    grid-area: previous;
+  }
+
+  #nextBtn {
+    grid-area: next;
+  }
+
+  .gallery-container .nav-btn {
+    width: 100%;
+    min-width: 0;
+    min-height: 52px;
+    padding: 8px 12px;
+    font-size: 1.6rem;
+  }
+
+  .info {
+    width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* ==========================================================
+   Statistik (statistik.html) - Kompaktes One-Page Layout
+   ========================================================== */
+
+/* Farben für Geschwindigkeitsklassen & Legenden-Quadrate */
+.speed-1, .fill.speed-1 { background-color: #00e5ff; }
+.speed-2, .fill.speed-2 { background-color: #2ecc71; }
+.speed-3, .fill.speed-3 { background-color: #f1c40f; }
+.speed-4, .fill.speed-4 { background-color: #ff4d4d; }
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+}
+
+.legend span::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  display: inline-block;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.legend-speed-1::before { background: #00e5ff; }
+.legend-speed-2::before { background: #2ecc71; }
+.legend-speed-3::before { background: #f1c40f; }
+.legend-speed-4::before { background: #ff4d4d; }
+
+/* Viewport-Layout ohne Haupt-Scrollbalken */
+body.stats-page {
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  background: #141414;
+}
+
+/* 1. Eine durchgehende, feine Kopfleiste (Titel + KPIs + Filter) */
+.stats-header-bar {
+  flex: 0 0 auto;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #242424;
+  padding: 6px 14px;
+  border-radius: var(--radius, 8px);
+  border: 1px solid #383838;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.stats-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+/* Kompakte Inline-KPIs (Vergrößert) */
+.kpi-inline-group {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.kpi-inline-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.kpi-label {
+  color: #a0a0a0;
+}
+
+.kpi-val {
+  font-size: 1.15rem;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.kpi-alert {
+  color: #ff4d4d;
+}
+
+.kpi-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Filteranpassung für flache Leiste */
+.filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-group label {
+  font-size: 0.68rem;
+  margin-bottom: 2px;
+  color: var(--muted, #888);
+}
+
+body.stats-page .filter-controls input,
+body.stats-page .filter-controls select {
+  background: #161616;
+  border: 1px solid #444;
+  color: #ffffff;
+  min-height: 30px;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  border-radius: 5px;
+}
+
+body.stats-page .btn-filter {
+  min-height: 30px;
+  padding: 2px 12px;
+  font-size: 0.8rem;
+  align-self: flex-end;
+}
+
+/* 2. Charts Grid (Linkes Diagramm nimmt Platz ein, rechtes auf 320px fixiert) */
+body.stats-page .charts {
+  flex: 1 1 0%;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 8px;
+  overflow: hidden;
+}
+
+body.stats-page .chart-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  padding: 8px 10px;
+  overflow: hidden;
+  background: #242424;
+  border: 1px solid #383838;
+  border-radius: var(--radius, 8px);
+}
+
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4px;
+}
+
+body.stats-page .chart-card h2 {
+  font-size: 0.88rem;
+  margin: 0 0 1px;
+}
+
+body.stats-page .chart-note {
+  font-size: 0.7rem;
+  margin: 0;
+  color: var(--muted, #888);
+}
+
+body.stats-page .legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  color: var(--muted, #888);
+  font-size: 0.68rem;
+}
+
+/* Vertikale Gruppen (Ankommend / Gegenverkehr) */
+.direction-chart-group,
+body.stats-page .speed-bands {
+  flex: 1 1 0%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.direction-subchart,
+.speed-dir-section {
+  flex: 1 1 0%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.subchart-title,
+.speed-dir-header {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--accent, #00d2ff);
+  margin-bottom: 3px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  line-height: 1.2;
+}
+
+/* Tagesverlauf Stundenbalken */
+body.stats-page .hour-chart {
+  flex: 1 1 0%;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  padding: 2px 2px 14px;
+  border-bottom: 1px solid #444;
+}
+
+body.stats-page .hour-column {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Zahlen über den Stundenbalken (Größer, weiß & fett) */
+body.stats-page .hour-count-top {
+  font-size: 11px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 2px;
+  min-height: 13px;
+  line-height: 1;
+}
+
+body.stats-page .stacked-bar {
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  overflow: hidden;
+  border-radius: 2px 2px 0 0;
+}
+
+body.stats-page .bar-segment {
+  width: 100%;
+  min-height: 0;
+}
+
+body.stats-page .hour-label {
+  position: absolute;
+  left: 50%;
+  bottom: -13px;
+  transform: translateX(-50%);
+  color: var(--muted, #888);
+  font-size: 0.58rem;
+}
+
+/* Geschwindigkeitsklassen (Einzeilige Layouts ohne Umbrüche) */
+.speed-row {
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr) 65px;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68rem;
+}
+
+.speed-row span {
+  white-space: nowrap;
+}
+
+.track {
+  height: 26px;
+  overflow: hidden;
+  background: #141414;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* Fallback für sehr kleine Bildschirme */
+@media (max-height: 600px), (max-width: 800px) {
+  body.stats-page {
+    height: auto;
+    max-height: none;
+    overflow-y: auto;
+  }
+  .stats-header-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  body.stats-page .charts {
+    grid-template-columns: 1fr;
+    height: auto;
+    overflow: visible;
+  }
+  body.stats-page .hour-chart {
+    height: 120px;
+  }
+}

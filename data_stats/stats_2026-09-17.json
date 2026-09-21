@@ -1,0 +1,553 @@
+{
+  "date": "2026-09-17",
+  "totalCount": 1282,
+  "avgSpeed": 52.3,
+  "maxSpeed": 78,
+  "speedSum": 67070,
+  "hourlyCounts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    106,
+    207,
+    118,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    136,
+    236,
+    193,
+    116,
+    63,
+    64,
+    34,
+    9
+  ],
+  "hourlySpeedBands": [
+    {
+      "speed1": 0,
+      "speed2": 0,
+      "speed3": 0,
+      "speed4": 0
+    },
+    {
+      "speed1": 0,
+      "speed2": 0,
+      "speed3": 0,
+      "speed4": 0
+    },
+    {
+      "speed1": 0,
+      "speed2": 0,
+      "speed3": 0,
+      "speed4": 0
+    },
+    {
+      "speed1": 0,
+      "speed2": 0,
+      "speed3": 0,
+      "speed4": 0
+    },
+    {
+      "speed1": 0,
+      "speed2": 0,
+      "speed3": 0,
+      "speed4": 0
+    },
+    {
+      "speed1": 0,
+      "speed2": 0,
+      "speed3": 0,
+      "speed4": 0
+    },
+    {
+      "speed1": 0,
+      "speed2": 16,
+      "speed3": 87,
+      "speed4": 3
+    },
+    {
+      "speed1": 5,
+      "speed2": 42,
+      "speed3": 155,
+      "speed4": 5
+    },
+    {
+      "speed1": 1,
+      "speed2": 37,
+      "speed3": 79,
+      "speed4": 1
+    },
+    {
+      "speed1": 0,
+      "speed2": 0,
+      "speed3": 0,
+      "speed4": 0
+    },
+    {
+      "speed1": 0,
+      "speed2": 0,
+      "speed3": 0,
+      "speed4": 0
+    },
+    {
+      "speed1": 0,
+      "speed2": 0,
+      "speed3": 0,
+      "speed4": 0
+    },
+    {
+      "speed1": 0,
+      "speed2": 0,
+      "speed3": 0,
+      "speed4": 0
+    },
+    {
+      "speed1": 0,
+      "speed2": 0,
+      "speed3": 0,
+      "speed4": 0
+    },
+    {
+      "speed1": 0,
+      "speed2": 0,
+      "speed3": 0,
+      "speed4": 0
+    },
+    {
+      "speed1": 0,
+      "speed2": 0,
+      "speed3": 0,
+      "speed4": 0
+    },
+    {
+      "speed1": 1,
+      "speed2": 75,
+      "speed3": 60,
+      "speed4": 0
+    },
+    {
+      "speed1": 2,
+      "speed2": 101,
+      "speed3": 132,
+      "speed4": 1
+    },
+    {
+      "speed1": 2,
+      "speed2": 59,
+      "speed3": 130,
+      "speed4": 2
+    },
+    {
+      "speed1": 0,
+      "speed2": 42,
+      "speed3": 74,
+      "speed4": 0
+    },
+    {
+      "speed1": 4,
+      "speed2": 14,
+      "speed3": 42,
+      "speed4": 3
+    },
+    {
+      "speed1": 2,
+      "speed2": 17,
+      "speed3": 45,
+      "speed4": 0
+    },
+    {
+      "speed1": 0,
+      "speed2": 7,
+      "speed3": 27,
+      "speed4": 0
+    },
+    {
+      "speed1": 0,
+      "speed2": 3,
+      "speed3": 6,
+      "speed4": 0
+    }
+  ],
+  "hourlyDirectionCounts": {
+    "Ankommend": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      45,
+      102,
+      64,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      81,
+      147,
+      107,
+      64,
+      35,
+      34,
+      20,
+      5
+    ],
+    "Gegenverkehr": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      61,
+      105,
+      54,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      55,
+      89,
+      86,
+      52,
+      28,
+      30,
+      14,
+      4
+    ]
+  },
+  "hourlyDirectionSpeedBands": {
+    "Ankommend": [
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 4,
+        "speed3": 40,
+        "speed4": 1
+      },
+      {
+        "speed1": 2,
+        "speed2": 15,
+        "speed3": 82,
+        "speed4": 3
+      },
+      {
+        "speed1": 0,
+        "speed2": 20,
+        "speed3": 43,
+        "speed4": 1
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 43,
+        "speed3": 38,
+        "speed4": 0
+      },
+      {
+        "speed1": 1,
+        "speed2": 59,
+        "speed3": 87,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 26,
+        "speed3": 80,
+        "speed4": 1
+      },
+      {
+        "speed1": 0,
+        "speed2": 20,
+        "speed3": 44,
+        "speed4": 0
+      },
+      {
+        "speed1": 2,
+        "speed2": 5,
+        "speed3": 27,
+        "speed4": 1
+      },
+      {
+        "speed1": 2,
+        "speed2": 9,
+        "speed3": 23,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 4,
+        "speed3": 16,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 1,
+        "speed3": 4,
+        "speed4": 0
+      }
+    ],
+    "Gegenverkehr": [
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 12,
+        "speed3": 47,
+        "speed4": 2
+      },
+      {
+        "speed1": 3,
+        "speed2": 27,
+        "speed3": 73,
+        "speed4": 2
+      },
+      {
+        "speed1": 1,
+        "speed2": 17,
+        "speed3": 36,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 0,
+        "speed3": 0,
+        "speed4": 0
+      },
+      {
+        "speed1": 1,
+        "speed2": 32,
+        "speed3": 22,
+        "speed4": 0
+      },
+      {
+        "speed1": 1,
+        "speed2": 42,
+        "speed3": 45,
+        "speed4": 1
+      },
+      {
+        "speed1": 2,
+        "speed2": 33,
+        "speed3": 50,
+        "speed4": 1
+      },
+      {
+        "speed1": 0,
+        "speed2": 22,
+        "speed3": 30,
+        "speed4": 0
+      },
+      {
+        "speed1": 2,
+        "speed2": 9,
+        "speed3": 15,
+        "speed4": 2
+      },
+      {
+        "speed1": 0,
+        "speed2": 8,
+        "speed3": 22,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 3,
+        "speed3": 11,
+        "speed4": 0
+      },
+      {
+        "speed1": 0,
+        "speed2": 2,
+        "speed3": 2,
+        "speed4": 0
+      }
+    ]
+  },
+  "speedBands": {
+    "Ankommend": {
+      "<30": 7,
+      "30-35": 18,
+      "35-40": 25,
+      "40-45": 42,
+      "45-50": 79,
+      "50-55": 246,
+      "55-60": 154,
+      "60-65": 93,
+      "65-70": 31,
+      ">70": 9
+    },
+    "Gegenverkehr": {
+      "<30": 10,
+      "30-35": 8,
+      "35-40": 14,
+      "40-45": 36,
+      "45-50": 99,
+      "50-55": 210,
+      "55-60": 119,
+      "60-65": 58,
+      "65-70": 16,
+      ">70": 8
+    }
+  }
+}
