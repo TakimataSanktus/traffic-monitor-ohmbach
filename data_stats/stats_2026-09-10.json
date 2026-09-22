@@ -3,6 +3,10 @@
   "totalCount": 3113,
   "avgSpeed": 52.5,
   "maxSpeed": 97,
+  "maxSpeedDirection": {
+    "Ankommend": 97,
+    "Gegenverkehr": 92
+  },
   "speedSum": 163524,
   "hourlyCounts": [
     2,
@@ -33,8 +37,8 @@
   "hourlySpeedBands": [
     {
       "speed1": 0,
-      "speed2": 1,
-      "speed3": 1,
+      "speed2": 0,
+      "speed3": 2,
       "speed4": 0
     },
     {
@@ -45,8 +49,8 @@
     },
     {
       "speed1": 1,
-      "speed2": 1,
-      "speed3": 1,
+      "speed2": 0,
+      "speed3": 2,
       "speed4": 0
     },
     {
@@ -63,105 +67,105 @@
     },
     {
       "speed1": 0,
-      "speed2": 7,
+      "speed2": 5,
       "speed3": 61,
-      "speed4": 3
+      "speed4": 5
     },
     {
       "speed1": 1,
-      "speed2": 22,
-      "speed3": 99,
+      "speed2": 19,
+      "speed3": 102,
       "speed4": 7
     },
     {
       "speed1": 0,
-      "speed2": 52,
-      "speed3": 163,
-      "speed4": 6
+      "speed2": 39,
+      "speed3": 175,
+      "speed4": 7
     },
     {
       "speed1": 7,
-      "speed2": 63,
-      "speed3": 99,
+      "speed2": 55,
+      "speed3": 107,
       "speed4": 3
     },
     {
       "speed1": 3,
-      "speed2": 50,
-      "speed3": 122,
+      "speed2": 42,
+      "speed3": 130,
       "speed4": 5
     },
     {
       "speed1": 9,
-      "speed2": 74,
-      "speed3": 86,
+      "speed2": 63,
+      "speed3": 97,
       "speed4": 3
     },
     {
       "speed1": 2,
-      "speed2": 79,
-      "speed3": 124,
-      "speed4": 1
+      "speed2": 64,
+      "speed3": 138,
+      "speed4": 2
     },
     {
       "speed1": 4,
-      "speed2": 37,
-      "speed3": 155,
+      "speed2": 25,
+      "speed3": 167,
       "speed4": 2
     },
     {
       "speed1": 2,
-      "speed2": 69,
-      "speed3": 153,
+      "speed2": 48,
+      "speed3": 174,
       "speed4": 4
     },
     {
       "speed1": 1,
-      "speed2": 84,
-      "speed3": 149,
+      "speed2": 65,
+      "speed3": 168,
       "speed4": 6
     },
     {
       "speed1": 2,
-      "speed2": 80,
-      "speed3": 175,
+      "speed2": 69,
+      "speed3": 186,
       "speed4": 2
     },
     {
       "speed1": 8,
-      "speed2": 98,
-      "speed3": 184,
+      "speed2": 77,
+      "speed3": 205,
       "speed4": 5
     },
     {
       "speed1": 11,
-      "speed2": 63,
-      "speed3": 165,
-      "speed4": 1
-    },
-    {
-      "speed1": 3,
-      "speed2": 41,
-      "speed3": 131,
+      "speed2": 51,
+      "speed3": 176,
       "speed4": 2
     },
     {
-      "speed1": 0,
-      "speed2": 38,
-      "speed3": 67,
+      "speed1": 3,
+      "speed2": 35,
+      "speed3": 135,
       "speed4": 4
     },
     {
       "speed1": 0,
-      "speed2": 28,
-      "speed3": 44,
+      "speed2": 32,
+      "speed3": 73,
+      "speed4": 4
+    },
+    {
+      "speed1": 0,
+      "speed2": 21,
+      "speed3": 51,
       "speed4": 2
     },
     {
       "speed1": 0,
-      "speed2": 22,
-      "speed3": 48,
-      "speed4": 0
+      "speed2": 18,
+      "speed3": 51,
+      "speed4": 1
     },
     {
       "speed1": 0,
@@ -234,8 +238,8 @@
     "Ankommend": [
       {
         "speed1": 0,
-        "speed2": 1,
-        "speed3": 1,
+        "speed2": 0,
+        "speed3": 2,
         "speed4": 0
       },
       {
@@ -246,8 +250,8 @@
       },
       {
         "speed1": 0,
-        "speed2": 1,
-        "speed3": 0,
+        "speed2": 0,
+        "speed3": 1,
         "speed4": 0
       },
       {
@@ -264,8 +268,8 @@
       },
       {
         "speed1": 0,
-        "speed2": 1,
-        "speed3": 12,
+        "speed2": 0,
+        "speed3": 13,
         "speed4": 1
       },
       {
@@ -276,92 +280,92 @@
       },
       {
         "speed1": 0,
-        "speed2": 29,
-        "speed3": 73,
-        "speed4": 3
+        "speed2": 23,
+        "speed3": 78,
+        "speed4": 4
       },
       {
         "speed1": 5,
-        "speed2": 37,
-        "speed3": 44,
+        "speed2": 35,
+        "speed3": 46,
         "speed4": 1
       },
       {
         "speed1": 1,
-        "speed2": 18,
-        "speed3": 64,
+        "speed2": 16,
+        "speed3": 66,
         "speed4": 3
       },
       {
         "speed1": 6,
-        "speed2": 41,
-        "speed3": 48,
+        "speed2": 33,
+        "speed3": 56,
         "speed4": 1
       },
       {
         "speed1": 2,
-        "speed2": 42,
-        "speed3": 61,
+        "speed2": 35,
+        "speed3": 68,
         "speed4": 1
       },
       {
         "speed1": 3,
-        "speed2": 18,
-        "speed3": 94,
+        "speed2": 14,
+        "speed3": 98,
         "speed4": 1
       },
       {
         "speed1": 2,
-        "speed2": 28,
-        "speed3": 85,
+        "speed2": 20,
+        "speed3": 93,
         "speed4": 2
       },
       {
         "speed1": 0,
-        "speed2": 44,
-        "speed3": 92,
+        "speed2": 35,
+        "speed3": 101,
         "speed4": 5
       },
       {
         "speed1": 2,
-        "speed2": 45,
-        "speed3": 113,
+        "speed2": 36,
+        "speed3": 122,
         "speed4": 2
       },
       {
         "speed1": 6,
-        "speed2": 53,
-        "speed3": 104,
+        "speed2": 45,
+        "speed3": 112,
         "speed4": 3
       },
       {
         "speed1": 8,
-        "speed2": 32,
-        "speed3": 100,
-        "speed4": 1
+        "speed2": 27,
+        "speed3": 104,
+        "speed4": 2
       },
       {
         "speed1": 2,
-        "speed2": 14,
-        "speed3": 81,
-        "speed4": 1
-      },
-      {
-        "speed1": 0,
-        "speed2": 21,
-        "speed3": 36,
-        "speed4": 1
-      },
-      {
-        "speed1": 0,
-        "speed2": 15,
-        "speed3": 26,
-        "speed4": 1
-      },
-      {
-        "speed1": 0,
         "speed2": 12,
-        "speed3": 25,
+        "speed3": 82,
+        "speed4": 2
+      },
+      {
+        "speed1": 0,
+        "speed2": 17,
+        "speed3": 40,
+        "speed4": 1
+      },
+      {
+        "speed1": 0,
+        "speed2": 9,
+        "speed3": 32,
+        "speed4": 1
+      },
+      {
+        "speed1": 0,
+        "speed2": 10,
+        "speed3": 27,
         "speed4": 0
       },
       {
@@ -410,105 +414,105 @@
       },
       {
         "speed1": 0,
-        "speed2": 6,
-        "speed3": 49,
-        "speed4": 2
+        "speed2": 5,
+        "speed3": 48,
+        "speed4": 4
       },
       {
         "speed1": 1,
-        "speed2": 16,
-        "speed3": 66,
+        "speed2": 13,
+        "speed3": 69,
         "speed4": 2
       },
       {
         "speed1": 0,
-        "speed2": 23,
-        "speed3": 90,
+        "speed2": 16,
+        "speed3": 97,
         "speed4": 3
+      },
+      {
+        "speed1": 2,
+        "speed2": 20,
+        "speed3": 61,
+        "speed4": 2
       },
       {
         "speed1": 2,
         "speed2": 26,
-        "speed3": 55,
+        "speed3": 64,
         "speed4": 2
+      },
+      {
+        "speed1": 3,
+        "speed2": 30,
+        "speed3": 41,
+        "speed4": 2
+      },
+      {
+        "speed1": 0,
+        "speed2": 29,
+        "speed3": 70,
+        "speed4": 1
+      },
+      {
+        "speed1": 1,
+        "speed2": 11,
+        "speed3": 69,
+        "speed4": 1
+      },
+      {
+        "speed1": 0,
+        "speed2": 28,
+        "speed3": 81,
+        "speed4": 2
+      },
+      {
+        "speed1": 1,
+        "speed2": 30,
+        "speed3": 67,
+        "speed4": 1
+      },
+      {
+        "speed1": 0,
+        "speed2": 33,
+        "speed3": 64,
+        "speed4": 0
       },
       {
         "speed1": 2,
         "speed2": 32,
-        "speed3": 58,
+        "speed3": 93,
         "speed4": 2
       },
       {
         "speed1": 3,
-        "speed2": 33,
-        "speed3": 38,
-        "speed4": 2
-      },
-      {
-        "speed1": 0,
-        "speed2": 37,
-        "speed3": 63,
+        "speed2": 24,
+        "speed3": 72,
         "speed4": 0
       },
       {
         "speed1": 1,
-        "speed2": 19,
-        "speed3": 61,
-        "speed4": 1
-      },
-      {
-        "speed1": 0,
-        "speed2": 41,
-        "speed3": 68,
+        "speed2": 23,
+        "speed3": 53,
         "speed4": 2
       },
       {
-        "speed1": 1,
-        "speed2": 40,
-        "speed3": 57,
-        "speed4": 1
-      },
-      {
         "speed1": 0,
-        "speed2": 35,
-        "speed3": 62,
-        "speed4": 0
-      },
-      {
-        "speed1": 2,
-        "speed2": 45,
-        "speed3": 80,
-        "speed4": 2
-      },
-      {
-        "speed1": 3,
-        "speed2": 31,
-        "speed3": 65,
-        "speed4": 0
-      },
-      {
-        "speed1": 1,
-        "speed2": 27,
-        "speed3": 50,
-        "speed4": 1
-      },
-      {
-        "speed1": 0,
-        "speed2": 17,
-        "speed3": 31,
+        "speed2": 15,
+        "speed3": 33,
         "speed4": 3
       },
       {
         "speed1": 0,
-        "speed2": 13,
-        "speed3": 18,
+        "speed2": 12,
+        "speed3": 19,
         "speed4": 1
       },
       {
         "speed1": 0,
-        "speed2": 10,
-        "speed3": 23,
-        "speed4": 0
+        "speed2": 8,
+        "speed3": 24,
+        "speed4": 1
       },
       {
         "speed1": 0,
