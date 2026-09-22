@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Traffic Monitor</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="stats-page">
+    <!-- Filterleiste mit integriertem Titel -->
+    <div class="stats-header-bar">
+      <!-- 1. Titel -->
+      <h1 class="stats-title">Traffic Monitor</h1>
+
+      <!-- 2. Kompakte KPIs in der Mitte -->
+      <div class="kpi-inline-group">
+        <div class="kpi-inline-item">
+          <span class="kpi-label">Messungen:</span>
+          <strong id="totalCount" class="kpi-val">0</strong>
+        </div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-inline-item">
+          <span class="kpi-label">Ø Tempo:</span>
+          <strong id="avgSpeed" class="kpi-val">0 km/h</strong>
+        </div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-inline-item">
+          <span class="kpi-label">Max Ank:</span>
+          <strong id="maxSpeedAnk" class="kpi-val">0 km/h</strong>
+        </div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-inline-item">
+          <span class="kpi-label">Max Geg:</span>
+          <strong id="maxSpeedGeg" class="kpi-val">0 km/h</strong>
+        </div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-inline-item">
+          <span class="kpi-label">Übertretungen (<span id="speedingDetail">≥ 55 km/h</span>):</span>
+          <strong id="speedingCount" class="kpi-val kpi-alert">0</strong>
+        </div>
+      </div>
+
+      <!-- 3. Filter rechts -->
+      <div class="filter-controls">
+        <div class="filter-group">
+          <label for="filterPreset">Zeitraum</label>
+          <select id="filterPreset" onchange="applyPreset()">
+            <option value="latest">Neuestes Datum</option>
+            <option value="week">Diese Woche</option>
+            <option value="month">Dieser Monat</option>
+            <option value="year">Dieses Jahr</option>
+            <option value="custom">Benutzerdefiniert</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filterFrom">Datum Von</label>
+          <input type="date" id="filterFrom" onchange="setCustomPreset()" />
+        </div>
+        <div class="filter-group">
+          <label for="filterTo">Datum Bis</label>
+          <input type="date" id="filterTo" onchange="setCustomPreset()" />
+        </div>
+        <button class="btn-filter" onclick="fetchAndRenderStats()">Filtern</button>
+      </div>
+    </div>
+
+    <!-- Hauptbereich (Diagramme) -->
+    <div class="charts">
+      <!-- Tageszeit-Verteilung getrennt nach Richtungen -->
+      <div class="chart-card hour-charts-card">
+        <div class="card-header-row">
+          <div>
+            <h2>Tagesverlauf nach Fahrtrichtung</h2>
+            <div class="chart-note">Anzahl Fahrzeuge pro Stunde</div>
+          </div>
+          <div class="legend">
+            <span class="legend-speed-1">&lt;30 km/h</span>
+            <span class="legend-speed-2">30-50 km/h</span>
+            <span class="legend-speed-3">50-70 km/h</span>
+            <span class="legend-speed-4">&gt;70 km/h</span>
+          </div>
+        </div>
+
+        <div class="direction-chart-group">
+          <div class="direction-subchart">
+            <div class="subchart-title">Ankommend</div>
+            <div class="hour-chart" id="hourChartAnkommend"></div>
+          </div>
+          <div class="direction-subchart">
+            <div class="subchart-title">Gegenverkehr</div>
+            <div class="hour-chart" id="hourChartGegenverkehr"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Geschwindigkeitsklassen -->
+      <div class="chart-card speed-bands-card">
+        <h2>Geschwindigkeitsklassen</h2>
+        <div class="chart-note">Aufschlüsselung nach Fahrtrichtung und Tempo</div>
+        <div class="speed-bands" id="speedBands"></div>
+      </div>
+    </div>
+
+    <script>
+      function formatDateInput(d) {
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+      }
+
+      const MAX_LOOKBACK_DAYS = 366;
+
+      async function fetchStatsForDate(dateStr) {
+        try {
+          const response = await fetch(`data_stats/stats_${dateStr}.json`, {
+            cache: "no-store",
+          });
+
+          if (!response.ok) {
+            return null;
+          }
+
+          const stats = await response.json();
+
+          return {
+            dateStr,
+            stats,
+          };
+        } catch (error) {
+          console.warn(
+            `Statistik für ${dateStr} konnte nicht geladen werden:`,
+            error,
+          );
+          return null;
+        }
+      }
+
+      function showNoDataMessage(message) {
+        document.getElementById("totalCount").innerText = "0";
+        document.getElementById("avgSpeed").innerText = "0 km/h";
+        document.getElementById("maxSpeedAnk").innerText = "0 km/h";
+        document.getElementById("maxSpeedGeg").innerText = "0 km/h";
+        document.getElementById("speedingCount").innerText = "0";
+
+        const ankommend = document.getElementById("hourChartAnkommend");
+        const gegenverkehr = document.getElementById("hourChartGegenverkehr");
+        const speedBands = document.getElementById("speedBands");
+
+        ankommend.innerHTML = `<div class="no-data-message">${message}</div>`;
+        gegenverkehr.innerHTML = `<div class="no-data-message">${message}</div>`;
+        speedBands.innerHTML = `<div class="no-data-message">${message}</div>`;
+      }
+
+      async function findLatestAvailableStats() {
+        const today = new Date();
+
+        const candidate = new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          today.getDate(),
+        );
+
+        for (let offset = 0; offset <= MAX_LOOKBACK_DAYS; offset++) {
+          const dateStr = formatDateInput(candidate);
+          const result = await fetchStatsForDate(dateStr);
+
+          if (result) {
+            return result;
+          }
+
+          candidate.setDate(candidate.getDate() - 1);
+        }
+
+        return null;
+      }
+
+      function applyPreset() {
+        const preset = document.getElementById("filterPreset").value;
+        const latestStr = document.body.dataset.latestStatsDate;
+
+        if (!latestStr) {
+          return;
+        }
+
+        const latestDate = new Date(latestStr + "T00:00:00");
+
+        let fromDate = new Date(latestDate);
+        let toDate = new Date(latestDate);
+
+        if (preset === "latest") {
+        } else if (preset === "week") {
+          const day = latestDate.getDay() || 7;
+          fromDate.setDate(latestDate.getDate() - day + 1);
+        } else if (preset === "month") {
+          fromDate = new Date(
+            latestDate.getFullYear(),
+            latestDate.getMonth(),
+            1,
+          );
+        } else if (preset === "year") {
+          fromDate = new Date(latestDate.getFullYear(), 0, 1);
+        } else {
+          return;
+        }
+
+        document.getElementById("filterFrom").value = formatDateInput(fromDate);
+        document.getElementById("filterTo").value = formatDateInput(toDate);
+
+        fetchAndRenderStats();
+      }
+
+      function setCustomPreset() {
+        document.getElementById("filterPreset").value = "custom";
+      }
+
+      function extractSpeedBands(b) {
+        if (!b) return { speed1: 0, speed2: 0, speed3: 0, speed4: 0 };
+
+        if (b.speed1 !== undefined || b.speed2 !== undefined || b.speed3 !== undefined || b.speed4 !== undefined) {
+          return {
+            speed1: b.speed1 || 0,
+            speed2: b.speed2 || 0,
+            speed3: b.speed3 || 0,
+            speed4: b.speed4 || 0,
+          };
+        }
+
+        if (Array.isArray(b)) {
+          return {
+            speed1: b[0] || 0,
+            speed2: b[1] || 0,
+            speed3: b[2] || 0,
+            speed4: b[3] || 0,
+          };
+        }
+
+        let s1 = 0, s2 = 0, s3 = 0, s4 = 0;
+        Object.entries(b).forEach(([label, count]) => {
+          if (label === "<30" || label === "speed1") {
+            s1 += count;
+          } else if (label === ">70" || label === "speed4") {
+            s4 += count;
+          } else {
+            const minVal = Number(label.split("-")[0]);
+            if (!isNaN(minVal)) {
+              if (minVal < 30) s1 += count;
+              else if (minVal < 50) s2 += count;
+              else if (minVal < 70) s3 += count;
+              else s4 += count;
+            }
+          }
+        });
+
+        return { speed1: s1, speed2: s2, speed3: s3, speed4: s4 };
+      }
+
+      function renderSingleHourChart(
+        containerId,
+        hourlyCounts,
+        hourlySpeedBands,
+      ) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = "";
+
+        const maxCount = Math.max(...hourlyCounts, 1);
+
+        hourlyCounts.forEach((count, hour) => {
+          const col = document.createElement("div");
+          col.className = "hour-column";
+
+          const barHeightPercent = (count / maxCount) * 100;
+          const rawBands = hourlySpeedBands[hour] || {};
+          const bands = extractSpeedBands(rawBands);
+
+          const totalBands = bands.speed1 + bands.speed2 + bands.speed3 + bands.speed4;
+          const safeCount = totalBands > 0 ? totalBands : count > 0 ? count : 1;
+
+          const seg1 = Math.round((bands.speed1 / safeCount) * 100);
+          const seg2 = Math.round((bands.speed2 / safeCount) * 100);
+          const seg3 = Math.round((bands.speed3 / safeCount) * 100);
+          const seg4 = Math.round((bands.speed4 / safeCount) * 100);
+
+          let segmentsHtml = "";
+          if (totalBands > 0) {
+            if (bands.speed1 > 0)
+              segmentsHtml += `<div class="bar-segment speed-1" style="height: ${seg1}%;" title="<30 km/h: ${bands.speed1}"></div>`;
+            if (bands.speed2 > 0)
+              segmentsHtml += `<div class="bar-segment speed-2" style="height: ${seg2}%;" title="30-50 km/h: ${bands.speed2}"></div>`;
+            if (bands.speed3 > 0)
+              segmentsHtml += `<div class="bar-segment speed-3" style="height: ${seg3}%;" title="50-70 km/h: ${bands.speed3}"></div>`;
+            if (bands.speed4 > 0)
+              segmentsHtml += `<div class="bar-segment speed-4" style="height: ${seg4}%;" title=">70 km/h: ${bands.speed4}"></div>`;
+          } else if (count > 0) {
+            segmentsHtml = `<div class="bar-segment speed-2" style="height: 100%;" title="Anzahl: ${count}"></div>`;
+          }
+
+          col.innerHTML = `
+            <div class="hour-count-top">${count > 0 ? count : ""}</div>
+            <div class="stacked-bar" style="height: ${count > 0 ? Math.max(barHeightPercent, 4) : 0}%;">
+              ${segmentsHtml}
+            </div>
+            <div class="hour-label">${String(hour).padStart(2, "0")}</div>
+          `;
+
+          container.appendChild(col);
+        });
+      }
+
+      function getSpeedBandColorClass(label) {
+        if (label === "<30") return "speed-1";
+        if (label === ">70") return "speed-4";
+        const minVal = Number(label.split("-")[0]);
+        if (isNaN(minVal)) return "speed-1";
+
+        if (minVal < 50) return "speed-2";
+        if (minVal < 70) return "speed-3";
+        return "speed-4";
+      }
+
+      function renderSpeedBands(speedBands) {
+        const container = document.getElementById("speedBands");
+        container.innerHTML = "";
+
+        Object.entries(speedBands).forEach(([direction, bands]) => {
+          const dirTotal = Object.values(bands).reduce(
+            (sum, count) => sum + count,
+            0,
+          );
+          const safeDirTotal = dirTotal > 0 ? dirTotal : 1;
+          const maxBandCount = Math.max(...Object.values(bands), 1);
+
+          const dirSection = document.createElement("div");
+          dirSection.className = "speed-dir-section";
+
+          let html = `
+            <div class="speed-dir-header">
+              ${direction} (${dirTotal} Fahrzeuge)
+            </div>
+          `;
+
+          Object.entries(bands).forEach(([label, count]) => {
+            const percent = Math.round((count / safeDirTotal) * 100);
+            const barWidthPercent = Math.round((count / maxBandCount) * 100);
+            const colorClass = getSpeedBandColorClass(label);
+
+            html += `
+              <div class="speed-row">
+                <span>${label} km/h</span>
+                <div class="track">
+                  <div class="fill ${colorClass}" style="width: ${barWidthPercent}%;"></div>
+                </div>
+                <strong>${count} (${percent}%)</strong>
+              </div>
+            `;
+          });
+
+          dirSection.innerHTML = html;
+          container.appendChild(dirSection);
+        });
+      }
+
+      function calculateSpeedingCount(speedBands, limit) {
+        let count = 0;
+        Object.values(speedBands).forEach((directionBands) => {
+          Object.entries(directionBands).forEach(([label, num]) => {
+            let minVal = 0;
+            if (label.startsWith(">")) {
+              minVal = Number(label.substring(1));
+            } else if (label.startsWith("<")) {
+              minVal = 0;
+            } else {
+              minVal = Number(label.split("-")[0]);
+            }
+            if (!isNaN(minVal) && minVal >= limit) {
+              count += num;
+            }
+          });
+        });
+        return count;
+      }
+
+      async function fetchAndRenderStats() {
+        const fromStr = document.getElementById("filterFrom").value;
+        const toStr = document.getElementById("filterTo").value;
+        const limit = 55;
+
+        document.getElementById("speedingDetail").innerText = `≥ ${limit} km/h`;
+
+        if (!fromStr || !toStr) return;
+
+        const fromDate = new Date(fromStr + "T00:00:00");
+        const toDate = new Date(toStr + "T00:00:00");
+
+        let totalCount = 0;
+        let totalSpeedWeightedSum = 0;
+        let rawSpeedingCount = 0;
+        let globalMaxAnk = 0;
+        let globalMaxGeg = 0;
+
+        const hourlyAnkommend = Array(24).fill(0);
+        const hourlyGegenverkehr = Array(24).fill(0);
+
+        const bandsAnkommend = Array.from({ length: 24 }, () => ({
+          speed1: 0,
+          speed2: 0,
+          speed3: 0,
+          speed4: 0,
+        }));
+        const bandsGegenverkehr = Array.from({ length: 24 }, () => ({
+          speed1: 0,
+          speed2: 0,
+          speed3: 0,
+          speed4: 0,
+        }));
+
+        const aggregatedSpeedBands = {};
+
+        const datesToFetch = [];
+        for (
+          let d = new Date(fromDate);
+          d <= toDate;
+          d.setDate(d.getDate() + 1)
+        ) {
+          datesToFetch.push(formatDateInput(d));
+        }
+
+        const fetchPromises = datesToFetch.map((dateStr) =>
+          fetch(`data_stats/stats_${dateStr}.json`)
+            .then((res) => (res.ok ? res.json() : null))
+            .catch(() => null),
+        );
+
+        const results = await Promise.all(fetchPromises);
+        const availableResults = results.filter((stats) => stats !== null);
+
+        if (availableResults.length === 0) {
+          showNoDataMessage(
+            "Für den ausgewählten Zeitraum sind keine Statistikdaten vorhanden.",
+          );
+          return;
+        }
+
+        results.forEach((stats) => {
+          if (!stats) return;
+
+          const count = stats.totalCount || 0;
+          totalCount += count;
+          if (stats.avgSpeed && count) {
+            totalSpeedWeightedSum += stats.avgSpeed * count;
+          }
+          rawSpeedingCount += stats.speedingCount || 0;
+
+          const ankMax = stats.maxSpeedDirection?.Ankommend ?? stats.maxSpeed ?? 0;
+          const gegMax = stats.maxSpeedDirection?.Gegenverkehr ?? stats.maxSpeed ?? 0;
+          if (ankMax > globalMaxAnk) globalMaxAnk = ankMax;
+          if (gegMax > globalMaxGeg) globalMaxGeg = gegMax;
+
+          const ank =
+            (stats.hourlyDirectionCounts &&
+              stats.hourlyDirectionCounts.Ankommend) ||
+            stats.hourlyCounts ||
+            [];
+          const geg =
+            (stats.hourlyDirectionCounts &&
+              stats.hourlyDirectionCounts.Gegenverkehr) ||
+            [];
+
+          ank.forEach((val, h) => {
+            hourlyAnkommend[h] += val || 0;
+          });
+          geg.forEach((val, h) => {
+            hourlyGegenverkehr[h] += val || 0;
+          });
+
+          const ankBands =
+            (stats.hourlyDirectionSpeedBands &&
+              stats.hourlyDirectionSpeedBands.Ankommend) ||
+            stats.hourlySpeedBands ||
+            [];
+          const gegBands =
+            (stats.hourlyDirectionSpeedBands &&
+              stats.hourlyDirectionSpeedBands.Gegenverkehr) ||
+            [];
+
+          ankBands.forEach((b, h) => {
+            const extracted = extractSpeedBands(b);
+            bandsAnkommend[h].speed1 += extracted.speed1;
+            bandsAnkommend[h].speed2 += extracted.speed2;
+            bandsAnkommend[h].speed3 += extracted.speed3;
+            bandsAnkommend[h].speed4 += extracted.speed4;
+          });
+
+          gegBands.forEach((b, h) => {
+            const extracted = extractSpeedBands(b);
+            bandsGegenverkehr[h].speed1 += extracted.speed1;
+            bandsGegenverkehr[h].speed2 += extracted.speed2;
+            bandsGegenverkehr[h].speed3 += extracted.speed3;
+            bandsGegenverkehr[h].speed4 += extracted.speed4;
+          });
+
+          if (stats.speedBands) {
+            Object.entries(stats.speedBands).forEach(([dir, bands]) => {
+              if (!aggregatedSpeedBands[dir]) aggregatedSpeedBands[dir] = {};
+              Object.entries(bands).forEach(([label, c]) => {
+                aggregatedSpeedBands[dir][label] =
+                  (aggregatedSpeedBands[dir][label] || 0) + c;
+              });
+            });
+          }
+        });
+
+        const computedSpeeding = calculateSpeedingCount(
+          aggregatedSpeedBands,
+          limit,
+        );
+        const finalSpeedingCount =
+          computedSpeeding > 0 ? computedSpeeding : rawSpeedingCount;
+
+        document.getElementById("totalCount").innerText = totalCount;
+        const computedAvg =
+          totalCount > 0 ? Math.round(totalSpeedWeightedSum / totalCount) : 0;
+        document.getElementById("avgSpeed").innerText = `${computedAvg} km/h`;
+
+        document.getElementById("maxSpeedAnk").innerText = `${globalMaxAnk} km/h`;
+        document.getElementById("maxSpeedGeg").innerText = `${globalMaxGeg} km/h`;
+
+        const speedingElem = document.getElementById("speedingCount");
+        speedingElem.innerText = finalSpeedingCount;
+        speedingElem.style.color = finalSpeedingCount > 0 ? "#ff4d4d" : "";
+
+        renderSingleHourChart(
+          "hourChartAnkommend",
+          hourlyAnkommend,
+          bandsAnkommend,
+        );
+        renderSingleHourChart(
+          "hourChartGegenverkehr",
+          hourlyGegenverkehr,
+          bandsGegenverkehr,
+        );
+
+        renderSpeedBands(aggregatedSpeedBands);
+      }
+
+      async function initializeStatsPage() {
+        const latestResult = await findLatestAvailableStats();
+
+        if (!latestResult) {
+          showNoDataMessage(
+            `Keine Statistikdatei innerhalb der letzten ${MAX_LOOKBACK_DAYS} Tage gefunden.`,
+          );
+          return;
+        }
+
+        document.body.dataset.latestStatsDate = latestResult.dateStr;
+
+        document.getElementById("filterPreset").value = "latest";
+        document.getElementById("filterFrom").value = latestResult.dateStr;
+        document.getElementById("filterTo").value = latestResult.dateStr;
+
+        await fetchAndRenderStats();
+      }
+
+      initializeStatsPage();
+    </script>
+  </body>
+</html>
