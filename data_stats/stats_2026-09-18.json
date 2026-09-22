@@ -58,122 +58,122 @@
     {
       "speed1": 0,
       "speed2": 4,
-      "speed3": 11,
-      "speed4": 1
+      "speed3": 7,
+      "speed4": 5
     },
     {
       "speed1": 0,
-      "speed2": 12,
-      "speed3": 66,
-      "speed4": 2
+      "speed2": 10,
+      "speed3": 58,
+      "speed4": 12
     },
     {
       "speed1": 3,
-      "speed2": 20,
-      "speed3": 99,
-      "speed4": 4
+      "speed2": 16,
+      "speed3": 92,
+      "speed4": 15
     },
     {
       "speed1": 0,
-      "speed2": 71,
-      "speed3": 114,
-      "speed4": 4
+      "speed2": 57,
+      "speed3": 119,
+      "speed4": 13
     },
     {
       "speed1": 3,
-      "speed2": 61,
-      "speed3": 101,
-      "speed4": 3
+      "speed2": 54,
+      "speed3": 106,
+      "speed4": 5
     },
     {
       "speed1": 2,
-      "speed2": 57,
-      "speed3": 101,
-      "speed4": 2
+      "speed2": 39,
+      "speed3": 113,
+      "speed4": 8
     },
     {
       "speed1": 3,
-      "speed2": 42,
-      "speed3": 115,
-      "speed4": 3
+      "speed2": 29,
+      "speed3": 124,
+      "speed4": 7
     },
     {
       "speed1": 1,
-      "speed2": 43,
-      "speed3": 138,
-      "speed4": 3
+      "speed2": 33,
+      "speed3": 140,
+      "speed4": 11
     },
     {
       "speed1": 3,
-      "speed2": 48,
-      "speed3": 146,
-      "speed4": 3
+      "speed2": 39,
+      "speed3": 150,
+      "speed4": 8
     },
     {
       "speed1": 6,
-      "speed2": 66,
-      "speed3": 140,
-      "speed4": 3
+      "speed2": 53,
+      "speed3": 150,
+      "speed4": 6
     },
     {
       "speed1": 2,
-      "speed2": 55,
-      "speed3": 173,
-      "speed4": 2
+      "speed2": 41,
+      "speed3": 175,
+      "speed4": 14
     },
     {
       "speed1": 2,
-      "speed2": 97,
-      "speed3": 158,
-      "speed4": 3
+      "speed2": 82,
+      "speed3": 166,
+      "speed4": 10
     },
     {
       "speed1": 5,
-      "speed2": 100,
-      "speed3": 128,
-      "speed4": 2
+      "speed2": 84,
+      "speed3": 142,
+      "speed4": 4
     },
     {
       "speed1": 1,
-      "speed2": 100,
-      "speed3": 115,
-      "speed4": 3
+      "speed2": 84,
+      "speed3": 129,
+      "speed4": 5
     },
     {
       "speed1": 1,
-      "speed2": 47,
-      "speed3": 117,
-      "speed4": 2
+      "speed2": 40,
+      "speed3": 120,
+      "speed4": 6
     },
     {
       "speed1": 0,
-      "speed2": 49,
-      "speed3": 69,
-      "speed4": 0
+      "speed2": 39,
+      "speed3": 78,
+      "speed4": 1
     },
     {
       "speed1": 1,
-      "speed2": 34,
-      "speed3": 46,
-      "speed4": 2
+      "speed2": 28,
+      "speed3": 50,
+      "speed4": 4
     },
     {
       "speed1": 3,
-      "speed2": 22,
+      "speed2": 19,
       "speed3": 41,
-      "speed4": 2
-    },
-    {
-      "speed1": 0,
-      "speed2": 16,
-      "speed3": 31,
-      "speed4": 0
+      "speed4": 5
     },
     {
       "speed1": 0,
       "speed2": 11,
-      "speed3": 18,
-      "speed4": 0
+      "speed3": 35,
+      "speed4": 1
+    },
+    {
+      "speed1": 0,
+      "speed2": 9,
+      "speed3": 19,
+      "speed4": 1
     }
   ],
   "hourlyDirectionCounts": {
@@ -259,26 +259,26 @@
       {
         "speed1": 0,
         "speed2": 3,
-        "speed3": 4,
-        "speed4": 0
+        "speed3": 3,
+        "speed4": 1
       },
       {
         "speed1": 0,
-        "speed2": 6,
-        "speed3": 12,
+        "speed2": 5,
+        "speed3": 13,
         "speed4": 1
       },
       {
         "speed1": 2,
         "speed2": 8,
-        "speed3": 44,
-        "speed4": 0
+        "speed3": 39,
+        "speed4": 5
       },
       {
         "speed1": 0,
-        "speed2": 38,
-        "speed3": 54,
-        "speed4": 1
+        "speed2": 30,
+        "speed3": 57,
+        "speed4": 6
       },
       {
         "speed1": 1,
@@ -288,92 +288,92 @@
       },
       {
         "speed1": 0,
-        "speed2": 34,
-        "speed3": 38,
-        "speed4": 0
+        "speed2": 26,
+        "speed3": 42,
+        "speed4": 4
       },
       {
         "speed1": 2,
-        "speed2": 19,
-        "speed3": 75,
-        "speed4": 1
+        "speed2": 13,
+        "speed3": 78,
+        "speed4": 4
       },
       {
         "speed1": 1,
-        "speed2": 17,
-        "speed3": 88,
-        "speed4": 2
+        "speed2": 11,
+        "speed3": 90,
+        "speed4": 6
       },
       {
         "speed1": 2,
-        "speed2": 24,
-        "speed3": 88,
-        "speed4": 1
+        "speed2": 17,
+        "speed3": 92,
+        "speed4": 4
       },
       {
         "speed1": 5,
-        "speed2": 38,
-        "speed3": 80,
-        "speed4": 2
+        "speed2": 31,
+        "speed3": 85,
+        "speed4": 4
       },
       {
         "speed1": 2,
-        "speed2": 37,
-        "speed3": 115,
-        "speed4": 0
+        "speed2": 29,
+        "speed3": 116,
+        "speed4": 7
       },
       {
         "speed1": 2,
-        "speed2": 66,
-        "speed3": 81,
-        "speed4": 1
+        "speed2": 57,
+        "speed3": 85,
+        "speed4": 6
       },
       {
         "speed1": 4,
-        "speed2": 70,
-        "speed3": 66,
-        "speed4": 1
-      },
-      {
-        "speed1": 1,
-        "speed2": 67,
-        "speed3": 60,
+        "speed2": 61,
+        "speed3": 74,
         "speed4": 2
       },
       {
         "speed1": 1,
-        "speed2": 28,
-        "speed3": 81,
-        "speed4": 1
-      },
-      {
-        "speed1": 0,
-        "speed2": 32,
-        "speed3": 42,
-        "speed4": 0
+        "speed2": 58,
+        "speed3": 67,
+        "speed4": 4
       },
       {
         "speed1": 1,
-        "speed2": 10,
-        "speed3": 28,
+        "speed2": 21,
+        "speed3": 85,
+        "speed4": 4
+      },
+      {
+        "speed1": 0,
+        "speed2": 25,
+        "speed3": 48,
         "speed4": 1
+      },
+      {
+        "speed1": 1,
+        "speed2": 9,
+        "speed3": 28,
+        "speed4": 2
       },
       {
         "speed1": 2,
-        "speed2": 15,
-        "speed3": 14,
-        "speed4": 2
+        "speed2": 13,
+        "speed3": 15,
+        "speed4": 3
       },
       {
         "speed1": 0,
-        "speed2": 7,
-        "speed3": 22,
-        "speed4": 0
+        "speed2": 4,
+        "speed3": 24,
+        "speed4": 1
       },
       {
         "speed1": 0,
-        "speed2": 7,
-        "speed3": 9,
+        "speed2": 6,
+        "speed3": 10,
         "speed4": 0
       }
     ],
@@ -405,122 +405,122 @@
       {
         "speed1": 0,
         "speed2": 1,
-        "speed3": 7,
-        "speed4": 1
-      },
-      {
-        "speed1": 0,
-        "speed2": 6,
-        "speed3": 54,
-        "speed4": 1
-      },
-      {
-        "speed1": 1,
-        "speed2": 12,
-        "speed3": 55,
+        "speed3": 4,
         "speed4": 4
       },
       {
         "speed1": 0,
-        "speed2": 33,
-        "speed3": 60,
+        "speed2": 5,
+        "speed3": 45,
+        "speed4": 11
+      },
+      {
+        "speed1": 1,
+        "speed2": 8,
+        "speed3": 53,
+        "speed4": 10
+      },
+      {
+        "speed1": 0,
+        "speed2": 27,
+        "speed3": 62,
+        "speed4": 7
+      },
+      {
+        "speed1": 2,
+        "speed2": 26,
+        "speed3": 62,
         "speed4": 3
       },
       {
         "speed1": 2,
-        "speed2": 33,
-        "speed3": 57,
-        "speed4": 1
+        "speed2": 13,
+        "speed3": 71,
+        "speed4": 4
       },
       {
-        "speed1": 2,
-        "speed2": 23,
-        "speed3": 63,
+        "speed1": 1,
+        "speed2": 16,
+        "speed3": 46,
+        "speed4": 3
+      },
+      {
+        "speed1": 0,
+        "speed2": 22,
+        "speed3": 50,
+        "speed4": 5
+      },
+      {
+        "speed1": 1,
+        "speed2": 22,
+        "speed3": 58,
+        "speed4": 4
+      },
+      {
+        "speed1": 1,
+        "speed2": 22,
+        "speed3": 65,
         "speed4": 2
+      },
+      {
+        "speed1": 0,
+        "speed2": 12,
+        "speed3": 59,
+        "speed4": 7
+      },
+      {
+        "speed1": 0,
+        "speed2": 25,
+        "speed3": 81,
+        "speed4": 4
       },
       {
         "speed1": 1,
         "speed2": 23,
-        "speed3": 40,
+        "speed3": 68,
         "speed4": 2
       },
       {
         "speed1": 0,
         "speed2": 26,
-        "speed3": 50,
-        "speed4": 1
-      },
-      {
-        "speed1": 1,
-        "speed2": 24,
-        "speed3": 58,
-        "speed4": 2
-      },
-      {
-        "speed1": 1,
-        "speed2": 28,
-        "speed3": 60,
-        "speed4": 1
-      },
-      {
-        "speed1": 0,
-        "speed2": 18,
-        "speed3": 58,
-        "speed4": 2
-      },
-      {
-        "speed1": 0,
-        "speed2": 31,
-        "speed3": 77,
-        "speed4": 2
-      },
-      {
-        "speed1": 1,
-        "speed2": 30,
         "speed3": 62,
         "speed4": 1
       },
       {
         "speed1": 0,
-        "speed2": 33,
-        "speed3": 55,
-        "speed4": 1
+        "speed2": 19,
+        "speed3": 35,
+        "speed4": 2
+      },
+      {
+        "speed1": 0,
+        "speed2": 14,
+        "speed3": 30,
+        "speed4": 0
       },
       {
         "speed1": 0,
         "speed2": 19,
-        "speed3": 36,
-        "speed4": 1
-      },
-      {
-        "speed1": 0,
-        "speed2": 17,
-        "speed3": 27,
-        "speed4": 0
-      },
-      {
-        "speed1": 0,
-        "speed2": 24,
-        "speed3": 18,
-        "speed4": 1
+        "speed3": 22,
+        "speed4": 2
       },
       {
         "speed1": 1,
+        "speed2": 6,
+        "speed3": 26,
+        "speed4": 2
+      },
+      {
+        "speed1": 0,
         "speed2": 7,
-        "speed3": 27,
+        "speed3": 11,
         "speed4": 0
       },
       {
         "speed1": 0,
-        "speed2": 9,
+        "speed2": 3,
         "speed3": 9,
-        "speed4": 0
-      },
-      {
-        "speed1": 0,
-        "speed2": 4,
-        "speed3": 9,
-        "speed4": 0
+        "speed4": 1
       }
     ]
   },
