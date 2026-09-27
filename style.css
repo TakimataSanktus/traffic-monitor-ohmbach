@@ -1,0 +1,457 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: dark;
+
+  --bg: #141414;
+  --panel: #242424;
+  --border: #383838;
+  --text: #e6e6e6;
+  --muted: #888888;
+  --accent: #00d2ff;
+  --radius: 8px;
+}
+
+html {
+  background: var(--bg);
+}
+
+body.stats-page {
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ==========================================================
+   Farben für Geschwindigkeitsklassen & Legende
+   ========================================================== */
+
+.speed-1, .fill.speed-1 { background-color: #00e5ff; }
+.speed-2, .fill.speed-2 { background-color: #2ecc71; }
+.speed-3, .fill.speed-3 { background-color: #f1c40f; }
+.speed-4, .fill.speed-4 { background-color: #ff4d4d; }
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+}
+
+.legend span::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  display: inline-block;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.legend-speed-1::before { background: #00e5ff; }
+.legend-speed-2::before { background: #2ecc71; }
+.legend-speed-3::before { background: #f1c40f; }
+.legend-speed-4::before { background: #ff4d4d; }
+
+/* ==========================================================
+   Kopfleiste (Titel + KPIs + Filter)
+   ========================================================== */
+
+.stats-header-bar {
+  flex: 0 0 auto;
+  margin-bottom: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  background: var(--panel);
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.stats-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+/* Kompakte Inline-KPIs */
+.kpi-inline-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.kpi-inline-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.kpi-label {
+  color: #a0a0a0;
+}
+
+.kpi-val {
+  font-size: 1.05rem;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.kpi-alert {
+  color: #ff4d4d;
+}
+
+.kpi-divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Filter-Steuerung */
+.filter-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px;
+  margin: 0;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-group label {
+  font-size: 0.68rem;
+  margin-bottom: 2px;
+  color: var(--muted);
+}
+
+body.stats-page .filter-controls input,
+body.stats-page .filter-controls select {
+  background: #161616;
+  border: 1px solid #444;
+  color: #ffffff;
+  min-height: 30px;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  border-radius: 5px;
+  font-family: inherit;
+}
+
+body.stats-page .filter-controls input:focus-visible,
+body.stats-page .filter-controls select:focus-visible,
+body.stats-page .btn-filter:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+body.stats-page .btn-filter {
+  min-height: 30px;
+  padding: 2px 12px;
+  font-size: 0.8rem;
+  background: var(--accent);
+  border: 0;
+  border-radius: 5px;
+  color: #111111;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+body.stats-page .btn-filter:hover {
+  filter: brightness(1.1);
+}
+
+/* ==========================================================
+   Hauptbereich (Diagramme)
+   ========================================================== */
+
+body.stats-page .charts {
+  flex: 1 1 0%;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 8px;
+  overflow: hidden;
+}
+
+body.stats-page .chart-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  padding: 8px 10px;
+  overflow: hidden;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+body.stats-page .chart-card h2 {
+  font-size: 0.88rem;
+  margin: 0 0 1px;
+}
+
+body.stats-page .chart-note {
+  font-size: 0.7rem;
+  margin: 0;
+  color: var(--muted);
+}
+
+body.stats-page .legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
+/* ==========================================================
+   Tagesverlauf (Stunden-Balkendiagramm)
+   ========================================================== */
+
+.direction-chart-group {
+  flex: 1 1 0%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.direction-subchart {
+  flex: 1 1 auto;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.subchart-title {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--accent);
+  margin-bottom: 3px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  line-height: 1.2;
+}
+
+body.stats-page .hour-chart {
+  flex: 1 1 auto;
+  min-height: 100px;
+  height: 100px;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  padding: 2px 2px 14px;
+  border-bottom: 1px solid #444;
+}
+
+body.stats-page .hour-column {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+body.stats-page .hour-count-top {
+  font-size: 11px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 2px;
+  min-height: 13px;
+  line-height: 1;
+}
+
+body.stats-page .stacked-bar {
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  overflow: hidden;
+  border-radius: 2px 2px 0 0;
+}
+
+body.stats-page .bar-segment {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+body.stats-page .hour-label {
+  position: absolute;
+  left: 50%;
+  bottom: -13px;
+  transform: translateX(-50%);
+  color: var(--muted);
+  font-size: 0.58rem;
+}
+
+/* ==========================================================
+   Geschwindigkeitsklassen (Rechtes Panel)
+   ========================================================== */
+
+body.stats-page .speed-bands {
+  flex: 1 1 0%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.speed-dir-section {
+  flex: 1 1 0%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.speed-dir-header {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--accent);
+  margin-bottom: 3px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  line-height: 1.2;
+}
+
+.speed-row {
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr) 65px;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68rem;
+}
+
+.speed-row span {
+  white-space: nowrap;
+}
+
+.track {
+  height: 26px;
+  overflow: hidden;
+  background: #141414;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.no-data-message {
+  width: 100%;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* ==========================================================
+   Responsive / Mobil-Ansicht (Smartphones & kleine Screens)
+   ========================================================== */
+
+@media (max-width: 800px) {
+  body.stats-page {
+    height: auto;
+    max-height: none;
+    overflow-y: auto;
+  }
+
+  .stats-header-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .kpi-inline-group {
+    justify-content: space-between;
+  }
+
+  .kpi-divider {
+    display: none;
+  }
+
+  .filter-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .filter-group {
+    flex: 1;
+    min-width: 90px;
+  }
+
+  body.stats-page .filter-controls input,
+  body.stats-page .filter-controls select,
+  body.stats-page .btn-filter {
+    width: 100%;
+  }
+
+  body.stats-page .charts {
+    grid-template-columns: 1fr;
+    height: auto;
+    overflow: visible;
+  }
+
+  .hour-charts-card {
+    min-height: 420px;
+  }
+
+  .direction-chart-group {
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+
+  .direction-subchart {
+    min-width: 480px;
+    height: 160px;
+    margin-bottom: 16px;
+  }
+
+  body.stats-page .hour-chart {
+    height: 110px;
+    min-height: 110px;
+  }
+}
